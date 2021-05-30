@@ -13,16 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@RefreshScope
+
 public class Orderservice {
     @Autowired
     private OrderRepository repository;
     @Autowired
-    @Lazy
+
 
     private RestTemplate template;
-    @Value("${microservice.payment-service.endpoints.endpoint.uri}")
-    private String ENDPOINT_URL;
+
     public TransactionResponse saveOrder(TransactionRequest request){
         String response="";
         Order order=request.getOrder();
@@ -30,7 +29,7 @@ public class Orderservice {
         payment.setOrderId(order.getId());
         payment.setAmount(order.getPrice());
         //rest call:
-        Payment paymentResponse=template.postForObject(ENDPOINT_URL,payment,Payment.class);
+        Payment paymentResponse=template.postForObject("http://PAYMENT-SERVICE/payment/doPayment",payment,Payment.class);
 
         response=paymentResponse.getPaymentStatus().equals("success")?"payment processing successful and order placed":"there is a failure in payment api, order added to cart";
          repository.save(order);
