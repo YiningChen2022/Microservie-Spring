@@ -12,6 +12,7 @@ import java.util.UUID;
 public class Paymentservice {
     @Autowired
     private PaymentRepository repository;
+
     public Payment doPayment(Payment payment){
         payment.setPaymentStatus(paymentProcessing());
         payment.setTransactionId(UUID.randomUUID().toString());
