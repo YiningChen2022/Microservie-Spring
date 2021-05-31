@@ -6,7 +6,6 @@ spring:
       enabled: true
   application:
     name: PAYMENT-SERVICE
-
-
-
-
+logging:
+  file:
+    name: /Users/yiningchen/Desktop/MA\ dmv/microservice.log

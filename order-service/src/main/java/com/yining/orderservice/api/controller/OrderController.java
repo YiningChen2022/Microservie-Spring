@@ -1,5 +1,6 @@
 package com.yining.orderservice.api.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yining.orderservice.api.common.Payment;
 import com.yining.orderservice.api.common.TransactionRequest;
 import com.yining.orderservice.api.common.TransactionResponse;
@@ -16,7 +17,7 @@ public class OrderController {
     @Autowired
     private Orderservice service;
     @PostMapping("/bookOrder")
-    public TransactionResponse bookOrder (@RequestBody TransactionRequest request){
+    public TransactionResponse bookOrder (@RequestBody TransactionRequest request) throws JsonProcessingException {
       return service.saveOrder(request);
 
    }

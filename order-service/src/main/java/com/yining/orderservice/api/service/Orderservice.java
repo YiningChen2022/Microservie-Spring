@@ -35,7 +35,7 @@ public class Orderservice {
         log.info("OrderService request:{}",new ObjectMapper().writeValueAsString(request));
         //rest call:
         Payment paymentResponse=template.postForObject("http://PAYMENT-SERVICE/payment/doPayment",payment,Payment.class);
-        log.info("payment-service response from OrderService:{}",new ObjectMapper().writeValueAsString(paymentResponse));
+        log.info("Payment-service response from OrderService rest call:{}",new ObjectMapper().writeValueAsString(paymentResponse));
         response=paymentResponse.getPaymentStatus().equals("success")?"payment processing successful and order placed":"there is a failure in payment api, order added to cart";
          repository.save(order);
          return new TransactionResponse(order,paymentResponse.getAmount(),paymentResponse.getTransactionId(),response);
